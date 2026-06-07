@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+        xsi:schemaLocation="https://jakarta.ee https://jakarta.ee/persistence_3_1.xsd"
+        version="3.1" xmlns:xsi="https://jakarta.ee/xml/ns/persistence">
+
+    <persistence-unit name="H2InMemoryPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+            <!-- JDBC Connection Settings -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
+
+            <!-- Schema generation: Automatically creates and drops tables on startup/shutdown -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+
+            <!-- Optional: Echo SQL commands to console for debugging -->
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+        <class>ru.hawoline.entity.User</class>
+    </persistence-unit>
+</persistence>
