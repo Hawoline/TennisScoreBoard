@@ -1,4 +1,4 @@
-package org.example;
+package ru.hawoline.tennisscoreboard.data;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -13,8 +13,8 @@ public class DatabaseConnectionManager {
     static {
         HikariConfig hikariConfig = new HikariConfig();
 
-        hikariConfig.setJdbcUrl("jdbc:sqlite::resource:database.db");
-        hikariConfig.setDriverClassName("org.sqlite.JDBC");
+        hikariConfig.setJdbcUrl("jdbc:h2:mem:default");
+        hikariConfig.setDriverClassName("org.h2.Driver");
 
         HIKARI_DATA_SOURCE = new HikariDataSource(hikariConfig);
     }

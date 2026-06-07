@@ -1,4 +1,4 @@
-package ru.hawoline.tennisscoreboard.domain;
+package ru.hawoline.tennisscoreboard.domain.model;
 
 public class GameScore {
     private int points;

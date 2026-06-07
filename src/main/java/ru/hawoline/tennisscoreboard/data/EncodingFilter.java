@@ -1,4 +1,4 @@
-package org.example;
+package ru.hawoline.tennisscoreboard.data;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

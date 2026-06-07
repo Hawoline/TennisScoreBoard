@@ -7,17 +7,16 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <properties>
-            <!-- JDBC Connection Settings -->
             <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:test"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:default"/>
 
-            <!-- Schema generation: Automatically creates and drops tables on startup/shutdown -->
             <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
 
             <!-- Optional: Echo SQL commands to console for debugging -->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
         </properties>
-        <class>ru.hawoline.entity.User</class>
+        <class>ru.hawoline.tennisscoreboard.data.entity.Player</class>
+        <class>ru.hawoline.tennisscoreboard.data.entity.Match</class>
     </persistence-unit>
 </persistence>

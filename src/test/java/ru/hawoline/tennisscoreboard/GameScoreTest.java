@@ -1,8 +1,8 @@
-package ru.hawoline.tennisscoreboard.domain.entity;
+package ru.hawoline.tennisscoreboard;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.hawoline.tennisscoreboard.domain.GameScore;
+import ru.hawoline.tennisscoreboard.domain.model.GameScore;
 
 import java.util.ArrayList;
 import java.util.List;
