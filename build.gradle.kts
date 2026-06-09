@@ -1,8 +1,8 @@
 plugins {
     java
     war
-    id("org.springframework.boot") version "4.0.6"
     id("io.spring.dependency-management") version "1.1.7"
+
 }
 
 group = "ru.hawoline"
@@ -20,15 +20,16 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-flyway")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    implementation("org.springframework.boot:spring-boot-starter-webmvc")
     implementation("org.hibernate.orm:hibernate-core:7.4.0.Final")
     implementation("com.h2database:h2:2.4.240")
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat-runtime")
-    testImplementation("org.springframework.boot:spring-boot-starter-flyway-test")
-    testImplementation("org.springframework.boot:spring-boot-starter-liquibase-test")
-    testImplementation("org.springframework.boot:spring-boot-starter-thymeleaf-test")
+    val springVersion = "7.0.8"
+    implementation("org.springframework:spring-core:$springVersion")
+    implementation("org.springframework:spring-context:$springVersion")
+    implementation("org.springframework:spring-web:$springVersion")
+    implementation("org.springframework:spring-webmvc:$springVersion")
+    implementation("org.thymeleaf:thymeleaf-spring6:3.1.5.RELEASE")
+    testImplementation(platform("org.junit:junit-bom:6.1.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
