@@ -25,4 +25,20 @@ public class Match {
 
     public Match() {
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getPlayer1() {
+        return player1;
+    }
+
+    public int getPlayer2() {
+        return player2;
+    }
+
+    public int getWinner() {
+        return winner;
+    }
 }

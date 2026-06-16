@@ -17,13 +17,13 @@ public class TennisScoreBoardApplication {
             playersRepository.save(new Player("Belikto"));
             playersRepository.save(new Player( "Bayarto"));
 
-            Player i = playersRepository.loadBy(1);
+            Player i = playersRepository.getBy(1);
             System.out.println(i);
 
             MatchesRepository matchesRepository = new MatchesRepository(em);
             matchesRepository.save(new Match(1, 3, 2));
-            Match match = matchesRepository.loadBy(1);
-            System.out.println(match);
+            Match match = matchesRepository.getBy(1);
+            System.out.println(match.getWinner());
         }
 	}
 

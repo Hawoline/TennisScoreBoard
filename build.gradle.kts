@@ -28,6 +28,7 @@ dependencies {
     implementation("org.springframework:spring-web:$springVersion")
     implementation("org.springframework:spring-webmvc:$springVersion")
     implementation("org.thymeleaf:thymeleaf-spring6:3.1.5.RELEASE")
+    compileOnly("jakarta.servlet:jakarta.servlet-api:6.2.0-M2")
     testImplementation(platform("org.junit:junit-bom:6.1.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
