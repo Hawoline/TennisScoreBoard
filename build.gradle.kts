@@ -21,13 +21,14 @@ repositories {
 
 dependencies {
     implementation("org.hibernate.orm:hibernate-core:7.4.0.Final")
-    implementation("com.h2database:h2:2.4.240")
+    implementation("org.postgresql:postgresql:42.7.13")
     val springVersion = "7.0.8"
     implementation("org.springframework:spring-core:$springVersion")
     implementation("org.springframework:spring-context:$springVersion")
     implementation("org.springframework:spring-web:$springVersion")
     implementation("org.springframework:spring-webmvc:$springVersion")
     implementation("org.thymeleaf:thymeleaf-spring6:3.1.5.RELEASE")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.22.1")
     compileOnly("jakarta.servlet:jakarta.servlet-api:6.2.0-M2")
     testImplementation(platform("org.junit:junit-bom:6.1.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")

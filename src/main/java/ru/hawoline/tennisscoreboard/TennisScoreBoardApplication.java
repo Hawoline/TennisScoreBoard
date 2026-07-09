@@ -3,27 +3,30 @@ package ru.hawoline.tennisscoreboard;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import ru.hawoline.tennisscoreboard.data.entity.Match;
-import ru.hawoline.tennisscoreboard.data.entity.Player;
-import ru.hawoline.tennisscoreboard.data.repository.MatchesRepository;
-import ru.hawoline.tennisscoreboard.data.repository.PlayersRepository;
+import ru.hawoline.tennisscoreboard.data.entity.CompletedMatchEntity;
+import ru.hawoline.tennisscoreboard.data.entity.PlayerEntity;
+import ru.hawoline.tennisscoreboard.data.repository.MatchRepository;
+import ru.hawoline.tennisscoreboard.data.repository.PlayerRepository;
 
 public class TennisScoreBoardApplication {
 
 	public static void main(String[] args) {
-        try (EntityManagerFactory emf = Persistence.createEntityManagerFactory("H2InMemoryPU");
+        try (EntityManagerFactory emf = Persistence.createEntityManagerFactory("Postgres");
              EntityManager em = emf.createEntityManager();) {
-            PlayersRepository playersRepository = new PlayersRepository(em);
-            playersRepository.save(new Player("Belikto"));
-            playersRepository.save(new Player( "Bayarto"));
+            PlayerRepository playerRepository = new PlayerRepository(em);
+            PlayerEntity belikto = new PlayerEntity("Belikto");
+            playerRepository.save(belikto);
+            PlayerEntity bayarto = new PlayerEntity("Bayarto");
+            PlayerEntity haw = new PlayerEntity("Haw");
+            playerRepository.save(bayarto);
 
-            Player i = playersRepository.getBy(1);
+            PlayerEntity i = playerRepository.getBy(1);
             System.out.println(i);
 
-            MatchesRepository matchesRepository = new MatchesRepository(em);
-            matchesRepository.save(new Match(1, 3, 2));
-            Match match = matchesRepository.getBy(1);
-            System.out.println(match.getWinner());
+            MatchRepository matchRepository = new MatchRepository(em);
+            matchRepository.save(new CompletedMatchEntity(belikto, bayarto, bayarto));
+            CompletedMatchEntity completedMatchEntity = matchRepository.getBy(1);
+            System.out.println(completedMatchEntity.getWinner().getName());
         }
 	}
 

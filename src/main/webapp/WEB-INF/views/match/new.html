@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>New person</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<form th:method="POST" th:action="@{/people}" th:object="${person}">
-    <label for="name">Enter name: </label>
-    <input type="text" th:field="*{name}" id="name"/>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>My app</title>
+</head>
+
+<body>
+<form th:method="POST" th:action="@{/new-completedMatch}">
+    <label for="first_name">First playerEntity name: </label>
+    <input type="text" th:field="*{name}" id="first_name" th:object="${player0}"/>
     <br/>
-    <input type="submit" value="Create!"/>
+    <label for="second_name">Second playerEntity name: </label>
+    <input type="text" th:field="*{name}" id="second_name" th:object="${playerEntity1}"/>
+    <br/>
+    <input type="submit" value="Play!"/>
 </form>
+<p th:text="${message}"></p>
 
 </body>
+
 </html>

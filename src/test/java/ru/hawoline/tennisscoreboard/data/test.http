@@ -1,0 +1,10 @@
+# @name test
+POST http://localhost:8080/matches
+Content-Type: application/json
+
+{
+  "firstPlayerName": "Bfff",
+  "secondPlayerName": "Bfff"
+}
+
+###

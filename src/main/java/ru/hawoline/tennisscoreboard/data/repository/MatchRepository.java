@@ -2,33 +2,33 @@ package ru.hawoline.tennisscoreboard.data.repository;
 
 import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Component;
-import ru.hawoline.tennisscoreboard.data.entity.Match;
+import ru.hawoline.tennisscoreboard.data.entity.CompletedMatchEntity;
 import ru.hawoline.tennisscoreboard.domain.Repository;
 
 import java.util.List;
 
 @Component
-public class MatchesRepository implements Repository<Match, Integer> {
+public class MatchRepository implements Repository<CompletedMatchEntity, Integer> {
     private final EntityManager entityManager;
 
-    public MatchesRepository(EntityManager entityManager) {
+    public MatchRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
     @Override
-    public void save(Match match) {
+    public void save(CompletedMatchEntity completedMatchEntity) {
         entityManager.getTransaction().begin();
-        entityManager.persist(match);
+        entityManager.persist(completedMatchEntity);
         entityManager.getTransaction().commit();
     }
 
     @Override
-    public Match getBy(Integer key) {
-        return entityManager.find(Match.class, key);
+    public CompletedMatchEntity getBy(Integer key) {
+        return entityManager.find(CompletedMatchEntity.class, key);
     }
 
     @Override
-    public List<Match> getAll() {
+    public List<CompletedMatchEntity> getAll() {
         return List.of();
     }
 }

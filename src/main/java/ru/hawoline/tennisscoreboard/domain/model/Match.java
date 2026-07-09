@@ -1,51 +1,22 @@
 package ru.hawoline.tennisscoreboard.domain.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
 public class Match {
-    private int id;
-    private int player1;
-    private int player2;
-    private int winner;
+    private String firstPlayerName;
+    private String secondPlayerName;
 
-    public Match(int id, int player1, int player2, int winner) {
-        this.id = id;
-        this.player1 = player1;
-        this.player2 = player2;
-        this.winner = winner;
+    public Match(String firstPlayerName, String secondPlayerName) {
+        this.firstPlayerName = firstPlayerName;
+        this.secondPlayerName = secondPlayerName;
     }
 
-    public int getId() {
-        return id;
+    public Match() {
     }
 
-    public int getPlayer1() {
-        return player1;
+    public String getFirstPlayerName() {
+        return firstPlayerName;
     }
 
-    public int getPlayer2() {
-        return player2;
-    }
-
-    public int getWinner() {
-        return winner;
-    }
-
-    public List<GameSet> getGameSets() {
-        return new ArrayList<>();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Match match = (Match) o;
-        return id == match.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
+    public String getSecondPlayerName() {
+        return secondPlayerName;
     }
 }

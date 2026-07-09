@@ -5,20 +5,17 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import ru.hawoline.tennisscoreboard.data.controller.NewMatchController;
-import ru.hawoline.tennisscoreboard.data.repository.MatchesRepository;
-import ru.hawoline.tennisscoreboard.data.repository.PlayersRepository;
-import ru.hawoline.tennisscoreboard.domain.service.NewMatchService;
-
-import java.util.List;
+import ru.hawoline.tennisscoreboard.data.controller.MatchController;
+import ru.hawoline.tennisscoreboard.data.repository.MatchRepository;
+import ru.hawoline.tennisscoreboard.data.repository.PlayerRepository;
+import ru.hawoline.tennisscoreboard.data.service.MatchService;
 
 @Configuration
 public class ApplicationContext {
 
     @Bean
     public EntityManagerFactory entityManagerFactory() {
-        return Persistence.createEntityManagerFactory("H2InMemoryPU");
+        return Persistence.createEntityManagerFactory("Postgres");
     }
     @Bean
     public EntityManager entityManager() {
@@ -26,22 +23,22 @@ public class ApplicationContext {
     }
 
     @Bean
-    public MatchesRepository matchesRepository() {
-        return new MatchesRepository(entityManager());
+    public MatchRepository matchesRepository() {
+        return new MatchRepository(entityManager());
     }
 
     @Bean
-    public PlayersRepository playersRepository() {
-        return new PlayersRepository(entityManager());
+    public PlayerRepository playerRepository() {
+        return new PlayerRepository(entityManager());
     }
 
     @Bean
-    public NewMatchController newMatchController() {
-        return new NewMatchController(newMatchService());
+    public MatchController matchController() {
+        return new MatchController(matchService());
     }
 
     @Bean
-    public NewMatchService newMatchService() {
-        return new NewMatchService();
+    public MatchService matchService() {
+        return new MatchService(playerRepository());
     }
 }
