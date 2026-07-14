@@ -27,7 +27,6 @@ dependencies {
     implementation("org.springframework:spring-context:$springVersion")
     implementation("org.springframework:spring-web:$springVersion")
     implementation("org.springframework:spring-webmvc:$springVersion")
-    implementation("org.thymeleaf:thymeleaf-spring6:3.1.5.RELEASE")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.22.1")
     compileOnly("jakarta.servlet:jakarta.servlet-api:6.2.0-M2")
     testImplementation(platform("org.junit:junit-bom:6.1.0"))

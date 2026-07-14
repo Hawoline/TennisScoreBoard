@@ -1,4 +1,4 @@
-# @name test
+# @name zeroGameWhenScore40_40
 POST http://localhost:8080/matches
 Content-Type: application/json
 

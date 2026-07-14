@@ -5,7 +5,7 @@ import ru.hawoline.tennisscoreboard.domain.model.Player;
 
 @Entity
 @Table(name = "Players")
-public class PlayerEntity extends Player {
+public class PlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

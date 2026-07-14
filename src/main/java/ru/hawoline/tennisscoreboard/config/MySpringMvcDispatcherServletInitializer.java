@@ -1,4 +1,4 @@
-package ru.hawoline.tennisscoreboard.data.controller.config;
+package ru.hawoline.tennisscoreboard.config;
 
 import org.jspecify.annotations.Nullable;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
