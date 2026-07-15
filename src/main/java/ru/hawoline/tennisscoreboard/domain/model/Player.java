@@ -1,9 +1,28 @@
 package ru.hawoline.tennisscoreboard.domain.model;
 
 public class Player {
+    private String name;
     private int score;
-    private int gameScore;
-    private int winSets;
+    private int games;
+    private int sets;
+
+    public Player() {
+    }
+
+    public Player(String name) {
+        this.name = name;
+    }
+
+    public Player(String name, int score, int games, int sets) {
+        this.name = name;
+        this.score = score;
+        this.games = games;
+        this.sets = sets;
+    }
+
+    public String getName() {
+        return name;
+    }
 
     public int getScore() {
         return score;
@@ -13,20 +32,20 @@ public class Player {
         this.score = score;
     }
 
-    public int getGameScore() {
-        return gameScore;
+    public int getGames() {
+        return games;
     }
 
-    public void setGameScore(int gameScore) {
-        this.gameScore = gameScore;
+    public void setGames(int games) {
+        this.games = games;
     }
 
-    public int getWinSets() {
-        return winSets;
+    public int getSets() {
+        return sets;
     }
 
-    public void setWinSets(int winSets) {
-        this.winSets = winSets;
+    public void setSets(int sets) {
+        this.sets = sets;
     }
 
     public void winScore() {
@@ -34,10 +53,10 @@ public class Player {
     }
 
     public void winGame() {
-        gameScore++;
+        games++;
     }
 
     public void winSet() {
-        winSets++;
+        sets++;
     }
 }

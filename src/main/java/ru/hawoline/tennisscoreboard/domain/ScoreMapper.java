@@ -1,9 +1,10 @@
 package ru.hawoline.tennisscoreboard.domain;
 
 import ru.hawoline.tennisscoreboard.domain.model.ScorePair;
+import ru.hawoline.tennisscoreboard.domain.model.ScorePairResponse;
 
-public class ScoreConverter {
-    public ScorePair convert(int firstPlayerScore, int secondPlayerScore) {
+public class ScoreMapper {
+    public ScorePairResponse toResponse(int firstPlayerScore, int secondPlayerScore) {
         String firstPlayerScoreString = "0";
         String secondPlayerScoreString;
         switch (firstPlayerScore) {
@@ -35,13 +36,28 @@ public class ScoreConverter {
                 break;
             default:
                 if (firstPlayerScore < secondPlayerScore) {
-                    return new ScorePair("40", "AD");
+                    return new ScorePairResponse("40", "AD");
                 } else if (firstPlayerScore > secondPlayerScore){
-                    return new ScorePair("AD", "40");
+                    return new ScorePairResponse("AD", "40");
                 } else {
-                    return new ScorePair("40", "40");
+                    return new ScorePairResponse("40", "40");
                 }
         }
-        return new ScorePair(firstPlayerScoreString, secondPlayerScoreString);
+        return new ScorePairResponse(firstPlayerScoreString, secondPlayerScoreString);
+    }
+
+    public int toScorePair(String score) {
+        switch (score) {
+            case "15":
+                return 1;
+            case "30":
+                return 2;
+            case "40":
+                return 4;
+            case "AD":
+                return 5;
+        }
+
+        return 0;
     }
 }

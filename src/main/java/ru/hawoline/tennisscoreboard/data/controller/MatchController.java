@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import ru.hawoline.tennisscoreboard.domain.model.CurrentMatchResponse;
 import ru.hawoline.tennisscoreboard.domain.model.Match;
 import ru.hawoline.tennisscoreboard.data.service.MatchService;
 
@@ -24,7 +25,7 @@ public class MatchController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Duplicate player");
         }
         if (match.getFirstPlayerName().isEmpty() || match.getSecondPlayerName().isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "empty player name");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empty player name");
         }
         return """
                 {
@@ -32,4 +33,9 @@ public class MatchController {
                 }""".formatted(matchService.newMatch(match));
     }
 
+//    @PostMapping(name = "/{uuid}/point", consumes= MediaType.APPLICATION_JSON_VALUE,
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    public CurrentMatchResponse addPoint(@PathVariable String uuid, @RequestBody String name) {
+//
+//    }
 }

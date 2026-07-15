@@ -1,19 +1,19 @@
 package ru.hawoline.tennisscoreboard.domain.model;
 
 public class ScorePair {
-    private String firstPlayerScore;
-    private String secondPlayerScore;
+    private int firstPlayerScore;
+    private int secondPlayerScore;
 
-    public ScorePair(String firstPlayerScore, String secondPlayerScore) {
+    public ScorePair(int firstPlayerScore, int secondPlayerScore) {
         this.firstPlayerScore = firstPlayerScore;
         this.secondPlayerScore = secondPlayerScore;
     }
 
-    public String getFirstPlayerScore() {
+    public int getFirstPlayerScore() {
         return firstPlayerScore;
     }
 
-    public String getSecondPlayerScore() {
+    public int getSecondPlayerScore() {
         return secondPlayerScore;
     }
 }
