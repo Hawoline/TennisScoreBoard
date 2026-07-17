@@ -4,6 +4,7 @@ public class CurrentMatch {
     private Player firstPlayer;
     private Player secondPlayer;
     private GameStage gameStage = GameStage.GAME;
+    private Player winner;
 
     public CurrentMatch(Player firstPlayer, Player secondPlayer) {
         this.firstPlayer = firstPlayer;
@@ -24,5 +25,13 @@ public class CurrentMatch {
 
     public void setGameStage(GameStage gameStage) {
         this.gameStage = gameStage;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Player winner) {
+        this.winner = winner;
     }
 }

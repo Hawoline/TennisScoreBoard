@@ -9,6 +9,7 @@ import ru.hawoline.tennisscoreboard.data.controller.MatchController;
 import ru.hawoline.tennisscoreboard.data.repository.MatchRepository;
 import ru.hawoline.tennisscoreboard.data.repository.PlayerRepository;
 import ru.hawoline.tennisscoreboard.data.service.MatchService;
+import ru.hawoline.tennisscoreboard.domain.CurrentMatchService;
 
 @Configuration
 public class ApplicationContext {
@@ -38,7 +39,11 @@ public class ApplicationContext {
     }
 
     @Bean
+    public CurrentMatchService currentMatchService() {
+        return new CurrentMatchService();
+    }
+    @Bean
     public MatchService matchService() {
-        return new MatchService(playerRepository());
+        return new MatchService(playerRepository(), currentMatchService());
     }
 }

@@ -3,8 +3,14 @@ POST http://localhost:8080/matches
 Content-Type: application/json
 
 {
-  "firstPlayerName": "Bfff",
-  "secondPlayerName": "Bfff"
+  "firstPlayerName": "Belikto",
+  "secondPlayerName": "Bayarto"
 }
-
 ###
+
+POST http://localhost:8080/matches/0c0529fa-0fbe-4550-830e-96994102e1d5/point
+Content-Type: application/json
+
+{
+    "name": "Belikto"
+}

@@ -1,7 +1,6 @@
 package ru.hawoline.tennisscoreboard.data.entity;
 
 import jakarta.persistence.*;
-import ru.hawoline.tennisscoreboard.domain.model.Player;
 
 @Entity
 @Table(name = "Players")

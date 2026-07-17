@@ -5,7 +5,6 @@ import ru.hawoline.tennisscoreboard.domain.model.GameStage;
 import ru.hawoline.tennisscoreboard.domain.model.Player;
 
 public class ScoreCalculator {
-    private Player winner;
 
     public void win(CurrentMatch currentMatch, int winPlayerId) {
         Player winPlayer;
@@ -52,11 +51,7 @@ public class ScoreCalculator {
         losePlayer.setGames(0);
         if (winPlayer.getSets() > 1) {
             currentMatch.setGameStage(GameStage.END);
-            winner = winPlayer;
+            currentMatch.setWinner(winPlayer);
         }
-    }
-
-    public Player getWinner() {
-        return winner;
     }
 }

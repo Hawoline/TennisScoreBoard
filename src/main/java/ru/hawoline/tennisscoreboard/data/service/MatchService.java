@@ -1,5 +1,6 @@
 package ru.hawoline.tennisscoreboard.data.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.hawoline.tennisscoreboard.data.entity.PlayerEntity;
 import ru.hawoline.tennisscoreboard.data.repository.PlayerRepository;
 import ru.hawoline.tennisscoreboard.domain.CurrentMatchService;
@@ -14,10 +15,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class MatchService {
     private PlayerRepository playerRepository;
-    private CurrentMatchService currentMatchService = new CurrentMatchService();
+    private CurrentMatchService currentMatchService;
 
-    public MatchService(PlayerRepository playerRepository) {
+    @Autowired
+    public MatchService(PlayerRepository playerRepository, CurrentMatchService currentMatchService) {
         this.playerRepository = playerRepository;
+        this.currentMatchService = currentMatchService;
     }
 
     public String newMatch(Match match) {
@@ -27,5 +30,9 @@ public class MatchService {
         String uuidString = uuid.toString();
         currentMatchService.newMatch(uuidString, new CurrentMatch(new Player(match.getFirstPlayerName()), new Player(match.getSecondPlayerName())));
         return uuidString;
+    }
+
+    public CurrentMatch addPoint(String uuid, String playerName) throws PlayerNotFoundException {
+        return currentMatchService.addPoint(uuid, playerName);
     }
 }

@@ -9,8 +9,11 @@ public class CurrentMatchResponse {
     private int secondPlayerGames;
     private int firstPlayerSets;
     private int secondPlayerSets;
+    private Integer firstPlayerTieBreakPoints;
+    private Integer secondPlayerTieBreakPoints;
+    private String winnerName;
 
-    public CurrentMatchResponse(String firstPlayerName, String secondPlayerName, String firstPlayerPoints, String secondPlayerPoints, int firstPlayerGames, int secondPlayerGames, int firstPlayerSets, int secondPlayerSets) {
+    public CurrentMatchResponse(String firstPlayerName, String secondPlayerName, String firstPlayerPoints, String secondPlayerPoints, int firstPlayerGames, int secondPlayerGames, int firstPlayerSets, int secondPlayerSets, Integer firstPlayerTieBreakPoints, Integer secondPlayerTieBreakPoints, String winnerName) {
         this.firstPlayerName = firstPlayerName;
         this.secondPlayerName = secondPlayerName;
         this.firstPlayerPoints = firstPlayerPoints;
@@ -19,6 +22,9 @@ public class CurrentMatchResponse {
         this.secondPlayerGames = secondPlayerGames;
         this.firstPlayerSets = firstPlayerSets;
         this.secondPlayerSets = secondPlayerSets;
+        this.firstPlayerTieBreakPoints = firstPlayerTieBreakPoints;
+        this.secondPlayerTieBreakPoints = secondPlayerTieBreakPoints;
+        this.winnerName = winnerName;
     }
 
     public CurrentMatchResponse() {
@@ -86,5 +92,29 @@ public class CurrentMatchResponse {
 
     public void setSecondPlayerSets(int secondPlayerSets) {
         this.secondPlayerSets = secondPlayerSets;
+    }
+
+    public Integer getFirstPlayerTieBreakPoints() {
+        return firstPlayerTieBreakPoints;
+    }
+
+    public void setFirstPlayerTieBreakPoints(Integer firstPlayerTieBreakPoints) {
+        this.firstPlayerTieBreakPoints = firstPlayerTieBreakPoints;
+    }
+
+    public Integer getSecondPlayerTieBreakPoints() {
+        return secondPlayerTieBreakPoints;
+    }
+
+    public void setSecondPlayerTieBreakPoints(Integer secondPlayerTieBreakPoints) {
+        this.secondPlayerTieBreakPoints = secondPlayerTieBreakPoints;
+    }
+
+    public String getWinnerName() {
+        return winnerName;
+    }
+
+    public void setWinnerName(String winnerName) {
+        this.winnerName = winnerName;
     }
 }

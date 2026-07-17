@@ -12,7 +12,7 @@ public class CurrentMatchService {
         currentMatches.put(uuid, currentMatch);
     }
 
-    public void addPoint(String matchUuid, String playerName) throws PlayerNotFoundException {
+    public CurrentMatch addPoint(String matchUuid, String playerName) throws PlayerNotFoundException {
         CurrentMatch currentMatch = currentMatches.get(matchUuid);
         String firstPlayerName = currentMatch.getFirstPlayer().getName();
         String secondPlayerName = currentMatch.getSecondPlayer().getName();
@@ -23,6 +23,8 @@ public class CurrentMatchService {
         } else {
             throw new PlayerNotFoundException();
         }
+
+        return currentMatch;
     }
 
     public ConcurrentHashMap<String, CurrentMatch> getCurrentMatches() {

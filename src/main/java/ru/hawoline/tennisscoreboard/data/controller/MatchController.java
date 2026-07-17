@@ -5,6 +5,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import ru.hawoline.tennisscoreboard.domain.CurrentMatchMapper;
+import ru.hawoline.tennisscoreboard.domain.PlayerNotFoundException;
+import ru.hawoline.tennisscoreboard.domain.model.AddPointRequest;
+import ru.hawoline.tennisscoreboard.domain.model.CurrentMatch;
 import ru.hawoline.tennisscoreboard.domain.model.CurrentMatchResponse;
 import ru.hawoline.tennisscoreboard.domain.model.Match;
 import ru.hawoline.tennisscoreboard.data.service.MatchService;
@@ -33,9 +37,17 @@ public class MatchController {
                 }""".formatted(matchService.newMatch(match));
     }
 
-//    @PostMapping(name = "/{uuid}/point", consumes= MediaType.APPLICATION_JSON_VALUE,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    public CurrentMatchResponse addPoint(@PathVariable String uuid, @RequestBody String name) {
-//
-//    }
+    @PostMapping(path = "/{uuid}/point", consumes= MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody CurrentMatchResponse addPoint(@PathVariable("uuid") String uuid, @RequestBody AddPointRequest addPointRequest) {
+        if (addPointRequest.getName().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empty player name");
+        }
+        try {
+            CurrentMatch currentMatch = matchService.addPoint(uuid, addPointRequest.getName());
+            return new CurrentMatchMapper().toResponse(currentMatch);
+        } catch (PlayerNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Player not found");
+        }
+    }
 }
