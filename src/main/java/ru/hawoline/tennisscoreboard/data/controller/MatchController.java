@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.hawoline.tennisscoreboard.domain.CurrentMatchMapper;
+import ru.hawoline.tennisscoreboard.domain.MatchNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.PlayerNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.model.AddPointRequest;
 import ru.hawoline.tennisscoreboard.domain.model.CurrentMatch;
@@ -48,6 +49,8 @@ public class MatchController {
             return new CurrentMatchMapper().toResponse(currentMatch);
         } catch (PlayerNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Player not found");
+        } catch (MatchNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Match not found");
         }
     }
 }

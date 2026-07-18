@@ -12,8 +12,11 @@ public class CurrentMatchService {
         currentMatches.put(uuid, currentMatch);
     }
 
-    public CurrentMatch addPoint(String matchUuid, String playerName) throws PlayerNotFoundException {
+    public CurrentMatch addPoint(String matchUuid, String playerName) throws PlayerNotFoundException, MatchNotFoundException {
         CurrentMatch currentMatch = currentMatches.get(matchUuid);
+        if(currentMatch == null) {
+            throw new MatchNotFoundException();
+        }
         String firstPlayerName = currentMatch.getFirstPlayer().getName();
         String secondPlayerName = currentMatch.getSecondPlayer().getName();
         if (firstPlayerName.equals(playerName)) {

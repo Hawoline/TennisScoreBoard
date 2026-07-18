@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.hawoline.tennisscoreboard.data.entity.PlayerEntity;
 import ru.hawoline.tennisscoreboard.data.repository.PlayerRepository;
 import ru.hawoline.tennisscoreboard.domain.CurrentMatchService;
+import ru.hawoline.tennisscoreboard.domain.MatchNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.PlayerNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.ScoreCalculator;
 import ru.hawoline.tennisscoreboard.domain.model.CurrentMatch;
@@ -32,7 +33,7 @@ public class MatchService {
         return uuidString;
     }
 
-    public CurrentMatch addPoint(String uuid, String playerName) throws PlayerNotFoundException {
+    public CurrentMatch addPoint(String uuid, String playerName) throws PlayerNotFoundException, MatchNotFoundException {
         return currentMatchService.addPoint(uuid, playerName);
     }
 }
