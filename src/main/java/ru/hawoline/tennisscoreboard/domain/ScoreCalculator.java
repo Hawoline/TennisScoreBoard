@@ -1,39 +1,39 @@
 package ru.hawoline.tennisscoreboard.domain;
 
-import ru.hawoline.tennisscoreboard.domain.model.CurrentMatch;
+import ru.hawoline.tennisscoreboard.domain.model.Match;
 import ru.hawoline.tennisscoreboard.domain.model.GameStage;
 import ru.hawoline.tennisscoreboard.domain.model.Player;
 
 public class ScoreCalculator {
 
-    public void win(CurrentMatch currentMatch, int winPlayerId) {
+    public void win(Match match, int winPlayerId) {
         Player winPlayer;
         Player losePlayer;
         if (winPlayerId == 0) {
-            winPlayer = currentMatch.getFirstPlayer();
-            losePlayer = currentMatch.getSecondPlayer();
+            winPlayer = match.getFirstPlayer();
+            losePlayer = match.getSecondPlayer();
         } else {
-            winPlayer = currentMatch.getSecondPlayer();
-            losePlayer = currentMatch.getFirstPlayer();
+            winPlayer = match.getSecondPlayer();
+            losePlayer = match.getFirstPlayer();
         }
-        if (currentMatch.getGameStage() == GameStage.END) {
+        if (match.getGameStage() == GameStage.END) {
             return;
         }
         winPlayer.winScore();
-        if (currentMatch.getGameStage() == GameStage.TIE_BREAK && winPlayer.getScore() > 6 && hasSuperiority(winPlayer, losePlayer)) {
-            currentMatch.setGameStage(GameStage.GAME);
-            winSet(winPlayer, losePlayer, currentMatch);
-        } else if (currentMatch.getGameStage() == GameStage.GAME && winPlayer.getScore() > 3 && hasSuperiority(winPlayer, losePlayer)) {
+        if (match.getGameStage() == GameStage.TIE_BREAK && winPlayer.getScore() > 6 && hasSuperiority(winPlayer, losePlayer)) {
+            match.setGameStage(GameStage.GAME);
+            winSet(winPlayer, losePlayer, match);
+        } else if (match.getGameStage() == GameStage.GAME && winPlayer.getScore() > 3 && hasSuperiority(winPlayer, losePlayer)) {
             winPlayer.winGame();
             winPlayer.setScore(0);
             losePlayer.setScore(0);
             if (winPlayer.getGames() > 5) {
                 if (losePlayer.getGames() == 6) {
-                    currentMatch.setGameStage(GameStage.TIE_BREAK);
+                    match.setGameStage(GameStage.TIE_BREAK);
                     winPlayer.setScore(0);
                     losePlayer.setScore(0);
                 } else if (winPlayer.getGames() > losePlayer.getGames() + 1 || winPlayer.getGames() == 7) {
-                    winSet(winPlayer, losePlayer, currentMatch);
+                    winSet(winPlayer, losePlayer, match);
                 }
             }
         }
@@ -43,15 +43,15 @@ public class ScoreCalculator {
         return winPlayer.getScore() > losePlayer.getScore() + 1;
     }
 
-    private void winSet(Player winPlayer, Player losePlayer, CurrentMatch currentMatch) {
+    private void winSet(Player winPlayer, Player losePlayer, Match match) {
         winPlayer.winSet();
         winPlayer.setScore(0);
         winPlayer.setGames(0);
         losePlayer.setScore(0);
         losePlayer.setGames(0);
         if (winPlayer.getSets() > 1) {
-            currentMatch.setGameStage(GameStage.END);
-            currentMatch.setWinner(winPlayer);
+            match.setGameStage(GameStage.END);
+            match.setWinner(winPlayer);
         }
     }
 }

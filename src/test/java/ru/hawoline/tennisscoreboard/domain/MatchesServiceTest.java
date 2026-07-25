@@ -2,18 +2,18 @@ package ru.hawoline.tennisscoreboard.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.hawoline.tennisscoreboard.domain.model.CurrentMatch;
+import ru.hawoline.tennisscoreboard.domain.model.Match;
 import ru.hawoline.tennisscoreboard.domain.model.GameStage;
 import ru.hawoline.tennisscoreboard.domain.model.Player;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CurrentMatchServiceTest {
+class MatchesServiceTest {
     private CurrentMatchService currentMatchService = new CurrentMatchService();
 
     @BeforeEach
     public void init() {
-        currentMatchService.newMatch("123", new CurrentMatch(
+        currentMatchService.newMatch("123", new Match(
                 new Player("Belikto"),
                 new Player("Bayarto")
         ));
@@ -23,8 +23,8 @@ class CurrentMatchServiceTest {
 
 
         currentMatchService.addPoint("123", "Belikto");
-        CurrentMatch currentMatch = currentMatchService.getCurrentMatches().get("123");
-        assertEquals(1, currentMatch.getFirstPlayer().getScore());
+        Match match = currentMatchService.getCurrentMatches().get("123");
+        assertEquals(1, match.getFirstPlayer().getScore());
     }
 
     @Test

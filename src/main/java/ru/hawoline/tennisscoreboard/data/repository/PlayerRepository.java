@@ -1,17 +1,15 @@
 package ru.hawoline.tennisscoreboard.data.repository;
 
-import jakarta.persistence.EntityExistsException;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceException;
-import jakarta.persistence.RollbackException;
+import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 import ru.hawoline.tennisscoreboard.data.entity.PlayerEntity;
 import ru.hawoline.tennisscoreboard.domain.Repository;
+import ru.hawoline.tennisscoreboard.domain.model.Player;
 
 import java.util.List;
 
 @Component
-public class PlayerRepository implements Repository<PlayerEntity, Integer> {
+public class PlayerRepository implements Repository<Player, String> {
     private final EntityManager entityManager;
 
     public PlayerRepository(EntityManager entityManager) {
@@ -19,7 +17,8 @@ public class PlayerRepository implements Repository<PlayerEntity, Integer> {
     }
 
     @Override
-    public void save(PlayerEntity playerEntity) {
+    public void save(Player player) {
+        PlayerEntity playerEntity = new PlayerEntity(player.getName());
         entityManager.getTransaction().begin();
         try {
             entityManager.persist(playerEntity);
@@ -30,12 +29,21 @@ public class PlayerRepository implements Repository<PlayerEntity, Integer> {
     }
 
     @Override
-    public PlayerEntity getBy(Integer key) {
-        return entityManager.find(PlayerEntity.class, key);
+    public Player getBy(String key) {
+        try {
+            TypedQuery<PlayerEntity> tq = entityManager.createQuery("from PlayerEntity WHERE name=:name", PlayerEntity.class);
+            PlayerEntity result = tq.setParameter("name", key).getSingleResult();
+
+            return new Player(result.getId(), result.getName());
+        } catch (NoResultException noresult) {
+        } catch (NonUniqueResultException notUnique) {
+        }
+
+        return new Player(-1, "Null");
     }
 
     @Override
-    public List<PlayerEntity> getAll() {
+    public List<Player> getAll() {
         return List.of();
     }
 }

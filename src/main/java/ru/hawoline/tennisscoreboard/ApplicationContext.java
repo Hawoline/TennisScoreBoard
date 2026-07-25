@@ -44,6 +44,6 @@ public class ApplicationContext {
     }
     @Bean
     public MatchService matchService() {
-        return new MatchService(playerRepository(), currentMatchService());
+        return new MatchService(currentMatchService(), matchesRepository(), playerRepository());
     }
 }

@@ -1,4 +1,4 @@
-# @name zeroGameWhenScore40_40
+# @name create matches and players
 POST http://localhost:8080/matches
 Content-Type: application/json
 
@@ -8,9 +8,62 @@ Content-Type: application/json
 }
 ###
 
-POST http://localhost:8080/matches/0c0529fa-0fbe-4550-830e-96994102e1d5/point
+< {%
+const matchId =  "ebac59ee-6e48-4145-9069-d308c6cfb157"
+    request.variables.set("id", [
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId,
+        matchId
+    ])
+%}
+POST http://localhost:8080/matches/{{id}}/point
 Content-Type: application/json
 
 {
-    "name": "Belikto"
+  "name": "Belikto"
 }

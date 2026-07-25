@@ -1,23 +1,38 @@
 package ru.hawoline.tennisscoreboard.domain.model;
 
 public class Player {
+    private int id;
     private String name;
     private int score;
     private int games;
     private int sets;
 
-    public Player() {
-    }
-
-    public Player(String name) {
-        this.name = name;
-    }
 
     public Player(String name, int score, int games, int sets) {
         this.name = name;
         this.score = score;
         this.games = games;
         this.sets = sets;
+    }
+
+    public Player(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public Player(String name) {
+        this.name = name;
+    }
+
+    public Player() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

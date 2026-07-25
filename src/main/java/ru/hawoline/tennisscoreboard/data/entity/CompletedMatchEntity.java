@@ -8,13 +8,13 @@ public class CompletedMatchEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(referencedColumnName = "id")
     private PlayerEntity playerEntity1;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(referencedColumnName = "id")
     private PlayerEntity playerEntity2;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(referencedColumnName = "id")
     private PlayerEntity winner;
 

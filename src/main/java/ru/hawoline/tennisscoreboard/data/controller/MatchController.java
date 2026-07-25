@@ -5,13 +5,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import ru.hawoline.tennisscoreboard.domain.CurrentMatchMapper;
+import ru.hawoline.tennisscoreboard.data.entity.MatchMapper;
 import ru.hawoline.tennisscoreboard.domain.MatchNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.PlayerNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.model.AddPointRequest;
-import ru.hawoline.tennisscoreboard.domain.model.CurrentMatch;
-import ru.hawoline.tennisscoreboard.domain.model.CurrentMatchResponse;
 import ru.hawoline.tennisscoreboard.domain.model.Match;
+import ru.hawoline.tennisscoreboard.domain.model.CurrentMatchResponse;
+import ru.hawoline.tennisscoreboard.domain.model.Opponents;
 import ru.hawoline.tennisscoreboard.data.service.MatchService;
 
 @RestController
@@ -25,17 +25,17 @@ public class MatchController {
     }
 
     @PostMapping(consumes= MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String newMatch(@RequestBody Match match) {
-        if (match.getFirstPlayerName().equals(match.getSecondPlayerName())) {
+    public String newMatch(@RequestBody Opponents opponents) {
+        if (opponents.getFirstPlayerName().equals(opponents.getSecondPlayerName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Duplicate player");
         }
-        if (match.getFirstPlayerName().isEmpty() || match.getSecondPlayerName().isEmpty()) {
+        if (opponents.getFirstPlayerName().isEmpty() || opponents.getSecondPlayerName().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empty player name");
         }
         return """
                 {
                     "id": "%s"
-                }""".formatted(matchService.newMatch(match));
+                }""".formatted(matchService.newMatch(opponents));
     }
 
     @PostMapping(path = "/{uuid}/point", consumes= MediaType.APPLICATION_JSON_VALUE,
@@ -45,8 +45,8 @@ public class MatchController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empty player name");
         }
         try {
-            CurrentMatch currentMatch = matchService.addPoint(uuid, addPointRequest.getName());
-            return new CurrentMatchMapper().toResponse(currentMatch);
+            Match match = matchService.addPoint(uuid, addPointRequest.getName());
+            return new MatchMapper().toResponse(match);
         } catch (PlayerNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Player not found");
         } catch (MatchNotFoundException e) {
