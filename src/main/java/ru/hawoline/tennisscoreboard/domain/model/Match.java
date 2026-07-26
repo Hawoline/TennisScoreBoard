@@ -1,7 +1,5 @@
 package ru.hawoline.tennisscoreboard.domain.model;
 
-import java.util.Objects;
-
 public class Match {
     private Player firstPlayer;
     private Player secondPlayer;

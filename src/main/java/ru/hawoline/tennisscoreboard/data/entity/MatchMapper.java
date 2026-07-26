@@ -24,4 +24,14 @@ public class MatchMapper {
                 winner == null ? null : winner.getName()
         );
     }
+
+    public Match fromCompletedMatchEntity(CompletedMatchEntity completedMatchEntity) {
+        PlayerEntity firstEntity = completedMatchEntity.getPlayer1();
+        PlayerEntity secondEntity = completedMatchEntity.getPlayer2();
+        PlayerEntity winnerEntity = completedMatchEntity.getWinner();
+        Player first = new Player(firstEntity.getId(), firstEntity.getName());
+        Player second = new Player(secondEntity.getId(), secondEntity.getName());
+        Player winner = new Player(winnerEntity.getId(), winnerEntity.getName());
+        return new Match(first, second, winner);
+    }
 }

@@ -15,6 +15,8 @@ import ru.hawoline.tennisscoreboard.domain.model.CurrentMatchResponse;
 import ru.hawoline.tennisscoreboard.domain.model.Opponents;
 import ru.hawoline.tennisscoreboard.domain.MatchService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/matches")
 public class MatchController {

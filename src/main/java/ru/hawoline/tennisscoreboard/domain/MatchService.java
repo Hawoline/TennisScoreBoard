@@ -7,6 +7,7 @@ import ru.hawoline.tennisscoreboard.domain.model.Match;
 import ru.hawoline.tennisscoreboard.domain.model.Opponents;
 import ru.hawoline.tennisscoreboard.domain.model.Player;
 
+import java.util.List;
 import java.util.UUID;
 
 public class MatchService {
@@ -45,5 +46,9 @@ public class MatchService {
             matchRepository.save(match);
         }
         return match;
+    }
+
+    public List<Match> findByPlayerName(String playerName) {
+        return matchRepository.getBy(playerName);
     }
 }
