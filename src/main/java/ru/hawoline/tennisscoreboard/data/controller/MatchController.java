@@ -6,14 +6,14 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.hawoline.tennisscoreboard.data.entity.MatchMapper;
-import ru.hawoline.tennisscoreboard.domain.DuplicateMatchException;
-import ru.hawoline.tennisscoreboard.domain.MatchNotFoundException;
-import ru.hawoline.tennisscoreboard.domain.PlayerNotFoundException;
+import ru.hawoline.tennisscoreboard.domain.exception.DuplicateMatchException;
+import ru.hawoline.tennisscoreboard.domain.exception.MatchNotFoundException;
+import ru.hawoline.tennisscoreboard.domain.exception.PlayerNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.model.AddPointRequest;
 import ru.hawoline.tennisscoreboard.domain.model.Match;
 import ru.hawoline.tennisscoreboard.domain.model.CurrentMatchResponse;
 import ru.hawoline.tennisscoreboard.domain.model.Opponents;
-import ru.hawoline.tennisscoreboard.data.service.MatchService;
+import ru.hawoline.tennisscoreboard.domain.MatchService;
 
 @RestController
 @RequestMapping("/matches")

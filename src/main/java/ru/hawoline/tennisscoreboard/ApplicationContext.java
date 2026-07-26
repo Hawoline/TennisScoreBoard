@@ -6,9 +6,9 @@ import jakarta.persistence.Persistence;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.hawoline.tennisscoreboard.data.controller.MatchController;
-import ru.hawoline.tennisscoreboard.data.repository.MatchRepository;
-import ru.hawoline.tennisscoreboard.data.repository.PlayerRepository;
-import ru.hawoline.tennisscoreboard.data.service.MatchService;
+import ru.hawoline.tennisscoreboard.data.repository.HibernateMatchRepository;
+import ru.hawoline.tennisscoreboard.data.repository.HibernatePlayerRepository;
+import ru.hawoline.tennisscoreboard.domain.MatchService;
 import ru.hawoline.tennisscoreboard.domain.CurrentMatchService;
 
 @Configuration
@@ -24,13 +24,13 @@ public class ApplicationContext {
     }
 
     @Bean
-    public MatchRepository matchesRepository() {
-        return new MatchRepository(entityManager());
+    public HibernateMatchRepository matchesRepository() {
+        return new HibernateMatchRepository(entityManager());
     }
 
     @Bean
-    public PlayerRepository playerRepository() {
-        return new PlayerRepository(entityManager());
+    public HibernatePlayerRepository playerRepository() {
+        return new HibernatePlayerRepository(entityManager());
     }
 
     @Bean

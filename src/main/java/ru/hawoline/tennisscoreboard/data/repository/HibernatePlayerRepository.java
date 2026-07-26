@@ -3,16 +3,16 @@ package ru.hawoline.tennisscoreboard.data.repository;
 import jakarta.persistence.*;
 import org.springframework.stereotype.Component;
 import ru.hawoline.tennisscoreboard.data.entity.PlayerEntity;
-import ru.hawoline.tennisscoreboard.domain.Repository;
+import ru.hawoline.tennisscoreboard.domain.PlayerRepository;
 import ru.hawoline.tennisscoreboard.domain.model.Player;
 
 import java.util.List;
 
 @Component
-public class PlayerRepository implements Repository<Player, String> {
+public class HibernatePlayerRepository implements PlayerRepository {
     private final EntityManager entityManager;
 
-    public PlayerRepository(EntityManager entityManager) {
+    public HibernatePlayerRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

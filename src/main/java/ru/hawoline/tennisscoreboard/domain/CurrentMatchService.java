@@ -1,5 +1,8 @@
 package ru.hawoline.tennisscoreboard.domain;
 
+import ru.hawoline.tennisscoreboard.domain.exception.DuplicateMatchException;
+import ru.hawoline.tennisscoreboard.domain.exception.MatchNotFoundException;
+import ru.hawoline.tennisscoreboard.domain.exception.PlayerNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.model.Match;
 import ru.hawoline.tennisscoreboard.domain.model.Player;
 
@@ -7,8 +10,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CurrentMatchService {
-    private ConcurrentHashMap<String, Match> currentMatches = new ConcurrentHashMap<>();
-    private ScoreCalculator scoreCalculator = new ScoreCalculator();
+    private final ConcurrentHashMap<String, Match> currentMatches = new ConcurrentHashMap<>();
+    private final ScoreCalculator scoreCalculator = new ScoreCalculator();
 
     public void newMatch(String uuid, Match match) throws DuplicateMatchException {
         Player firstPlayer = match.getFirstPlayer();

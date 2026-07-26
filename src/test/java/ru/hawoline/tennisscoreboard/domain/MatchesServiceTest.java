@@ -2,6 +2,9 @@ package ru.hawoline.tennisscoreboard.domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ru.hawoline.tennisscoreboard.domain.exception.DuplicateMatchException;
+import ru.hawoline.tennisscoreboard.domain.exception.MatchNotFoundException;
+import ru.hawoline.tennisscoreboard.domain.exception.PlayerNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.model.Match;
 import ru.hawoline.tennisscoreboard.domain.model.GameStage;
 import ru.hawoline.tennisscoreboard.domain.model.Player;

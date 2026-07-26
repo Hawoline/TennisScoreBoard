@@ -1,11 +1,8 @@
-package ru.hawoline.tennisscoreboard.data.service;
+package ru.hawoline.tennisscoreboard.domain;
 
-import ru.hawoline.tennisscoreboard.data.repository.MatchRepository;
-import ru.hawoline.tennisscoreboard.data.repository.PlayerRepository;
-import ru.hawoline.tennisscoreboard.domain.CurrentMatchService;
-import ru.hawoline.tennisscoreboard.domain.DuplicateMatchException;
-import ru.hawoline.tennisscoreboard.domain.MatchNotFoundException;
-import ru.hawoline.tennisscoreboard.domain.PlayerNotFoundException;
+import ru.hawoline.tennisscoreboard.domain.exception.DuplicateMatchException;
+import ru.hawoline.tennisscoreboard.domain.exception.MatchNotFoundException;
+import ru.hawoline.tennisscoreboard.domain.exception.PlayerNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.model.Match;
 import ru.hawoline.tennisscoreboard.domain.model.Opponents;
 import ru.hawoline.tennisscoreboard.domain.model.Player;
@@ -13,9 +10,9 @@ import ru.hawoline.tennisscoreboard.domain.model.Player;
 import java.util.UUID;
 
 public class MatchService {
-    private PlayerRepository playerRepository;
-    private MatchRepository matchRepository;
-    private CurrentMatchService currentMatchService;
+    private final MatchRepository matchRepository;
+    private final PlayerRepository playerRepository;
+    private final CurrentMatchService currentMatchService;
 
     public MatchService(CurrentMatchService currentMatchService, MatchRepository matchRepository, PlayerRepository playerRepository) {
         this.playerRepository = playerRepository;

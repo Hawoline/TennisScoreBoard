@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManager;
 import org.springframework.stereotype.Component;
 import ru.hawoline.tennisscoreboard.data.entity.CompletedMatchEntity;
 import ru.hawoline.tennisscoreboard.data.entity.PlayerEntity;
+import ru.hawoline.tennisscoreboard.domain.MatchRepository;
 import ru.hawoline.tennisscoreboard.domain.Repository;
 import ru.hawoline.tennisscoreboard.domain.model.Match;
 import ru.hawoline.tennisscoreboard.domain.model.Player;
@@ -11,10 +12,10 @@ import ru.hawoline.tennisscoreboard.domain.model.Player;
 import java.util.List;
 
 @Component
-public class MatchRepository implements Repository<Match, Integer> {
+public class HibernateMatchRepository implements MatchRepository {
     private final EntityManager entityManager;
 
-    public MatchRepository(EntityManager entityManager) {
+    public HibernateMatchRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 
