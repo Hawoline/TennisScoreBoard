@@ -1,5 +1,7 @@
 package ru.hawoline.tennisscoreboard.domain.model;
 
+import java.util.Objects;
+
 public class Player {
     private int id;
     private String name;
@@ -73,5 +75,17 @@ public class Player {
 
     public void winSet() {
         sets++;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return Objects.equals(name, player.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name);
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.hawoline.tennisscoreboard.data.entity.MatchMapper;
+import ru.hawoline.tennisscoreboard.domain.DuplicateMatchException;
 import ru.hawoline.tennisscoreboard.domain.MatchNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.PlayerNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.model.AddPointRequest;
@@ -32,10 +33,14 @@ public class MatchController {
         if (opponents.getFirstPlayerName().isEmpty() || opponents.getSecondPlayerName().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empty player name");
         }
-        return """
-                {
-                    "id": "%s"
-                }""".formatted(matchService.newMatch(opponents));
+        try {
+            return """
+                    {
+                        "id": "%s"
+                    }""".formatted(matchService.newMatch(opponents));
+        } catch (DuplicateMatchException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Match exists");
+        }
     }
 
     @PostMapping(path = "/{uuid}/point", consumes= MediaType.APPLICATION_JSON_VALUE,

@@ -6,7 +6,16 @@ Content-Type: application/json
   "firstPlayerName": "Belikto",
   "secondPlayerName": "Bayarto"
 }
-###
+
+### @name Duplicate match
+POST http://localhost:8080/matches
+Content-Type: application/json
+
+{
+  "firstPlayerName": "Belikto",
+  "secondPlayerName": "Neltan"
+}
+### @name win match
 
 < {%
 const matchId =  "ebac59ee-6e48-4145-9069-d308c6cfb157"

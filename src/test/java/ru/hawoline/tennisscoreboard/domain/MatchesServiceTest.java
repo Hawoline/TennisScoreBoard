@@ -12,14 +12,14 @@ class MatchesServiceTest {
     private CurrentMatchService currentMatchService = new CurrentMatchService();
 
     @BeforeEach
-    public void init() {
+    public void init() throws DuplicateMatchException {
         currentMatchService.newMatch("123", new Match(
                 new Player("Belikto"),
                 new Player("Bayarto")
         ));
     }
     @Test
-    public void test() throws PlayerNotFoundException {
+    public void test() throws PlayerNotFoundException, MatchNotFoundException {
 
 
         currentMatchService.addPoint("123", "Belikto");
@@ -28,7 +28,7 @@ class MatchesServiceTest {
     }
 
     @Test
-    public void zeroGameWhenScore40_40() throws PlayerNotFoundException {
+    public void zeroGameWhenScore40_40() throws PlayerNotFoundException, MatchNotFoundException {
 
         currentMatchService.addPoint("123", "Belikto");
         currentMatchService.addPoint("123", "Belikto");
@@ -42,7 +42,7 @@ class MatchesServiceTest {
     }
 
     @Test
-    public void tieBreak() throws PlayerNotFoundException {
+    public void tieBreak() throws PlayerNotFoundException, MatchNotFoundException {
 
         for (int i = 0; i < 20; i++) {
             currentMatchService.addPoint("123", "Belikto");

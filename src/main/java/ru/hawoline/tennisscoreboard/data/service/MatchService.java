@@ -3,6 +3,7 @@ package ru.hawoline.tennisscoreboard.data.service;
 import ru.hawoline.tennisscoreboard.data.repository.MatchRepository;
 import ru.hawoline.tennisscoreboard.data.repository.PlayerRepository;
 import ru.hawoline.tennisscoreboard.domain.CurrentMatchService;
+import ru.hawoline.tennisscoreboard.domain.DuplicateMatchException;
 import ru.hawoline.tennisscoreboard.domain.MatchNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.PlayerNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.model.Match;
@@ -22,15 +23,15 @@ public class MatchService {
         this.matchRepository = matchRepository;
     }
 
-    public String newMatch(Opponents opponents) {
-        playerRepository.save(new Player(opponents.getFirstPlayerName()));
-        playerRepository.save(new Player(opponents.getSecondPlayerName()));
+    public String newMatch(Opponents opponents) throws DuplicateMatchException {
+        String firstPlayerName = opponents.getFirstPlayerName();
+        playerRepository.save(new Player(firstPlayerName));
+
+        String secondPlayerName = opponents.getSecondPlayerName();
+        playerRepository.save(new Player(secondPlayerName));
+
         String uuid = UUID.randomUUID().toString();
-        currentMatchService.newMatch(uuid, new Match(
-                        new Player(opponents.getFirstPlayerName()),
-                        new Player(opponents.getSecondPlayerName())
-                )
-        );
+        currentMatchService.newMatch(uuid, new Match(new Player(firstPlayerName), new Player(secondPlayerName)));
         return uuid;
     }
 
