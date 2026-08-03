@@ -6,74 +6,74 @@ Content-Type: application/json
   "firstPlayerName": "Belikto",
   "secondPlayerName": "Bayarto"
 }
-
+> {%
+client.global.set("match_uuid", response.body.id)
+ %}
 ###
 GET http://localhost:8080/matches
 
 ###
 GET http://localhost:8080/matches?page=1&player_name=Nel
 
-### @name Duplicate match
-POST http://localhost:8080/matches
-Content-Type: application/json
+###
+GET http://localhost:8080/matches/{{match_uuid}}
 
-{
-  "firstPlayerName": "Belikto",
-  "secondPlayerName": "Neltan"
-}
+###
+GET http://localhost:8080/matches/match
+
 ### @name win match
 
 < {%
-const matchId =  "ebac59ee-6e48-4145-9069-d308c6cfb157"
+const match = client.global.get("match_uuid")
     request.variables.set("id", [
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId,
-        matchId
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match,
+        match
     ])
 %}
 POST http://localhost:8080/matches/{{id}}/point

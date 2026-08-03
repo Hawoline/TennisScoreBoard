@@ -60,6 +60,15 @@ public class MatchController {
         }
     }
 
+    @GetMapping(path = "/{uuid}")
+    public @ResponseBody CurrentMatchResponse getCurrentMatchBy(@PathVariable("uuid") String uuid) {
+        if (uuid.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "empty uuid");
+        }
+        Match match = matchService.getMatchBy(uuid);
+        return matchMapper.toResponse(match);
+    }
+
     @GetMapping()
     public @ResponseBody CompletedMatchesResponse getCompletedMatches(
             @RequestParam(name = "page", defaultValue = "-1") int page,

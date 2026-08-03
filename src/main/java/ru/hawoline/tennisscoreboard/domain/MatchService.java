@@ -48,6 +48,10 @@ public class MatchService {
         return match;
     }
 
+    public Match getMatchBy(String uuid) {
+        return currentMatchService.getMatchBy(uuid);
+    }
+
     public List<Match> findByPlayerName(String playerName) {
         return matchRepository.getBy(playerName);
     }

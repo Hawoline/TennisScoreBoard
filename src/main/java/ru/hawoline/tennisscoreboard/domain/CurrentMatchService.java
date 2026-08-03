@@ -57,4 +57,8 @@ public class CurrentMatchService {
     public ConcurrentHashMap<String, Match> getCurrentMatches() {
         return currentMatches;
     }
+
+    public Match getMatchBy(String uuid) {
+        return currentMatches.get(uuid);
+    }
 }
