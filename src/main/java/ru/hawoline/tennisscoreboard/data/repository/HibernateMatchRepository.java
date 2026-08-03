@@ -44,7 +44,14 @@ public class HibernateMatchRepository implements MatchRepository {
 
     @Override
     public List<Match> getAll() {
-        return List.of();
+        List<CompletedMatchEntity> all = entityManager
+                .createQuery("SELECT m from CompletedMatchEntity m", CompletedMatchEntity.class)
+                .getResultList();
+        List<Match> result = new ArrayList<>();
+        for (CompletedMatchEntity completedMatchEntity : all) {
+            result.add(matchMapper.fromCompletedMatchEntity(completedMatchEntity));
+        }
+        return result;
     }
 
     @Override

@@ -7,6 +7,12 @@ Content-Type: application/json
   "secondPlayerName": "Bayarto"
 }
 
+###
+GET http://localhost:8080/matches
+
+###
+GET http://localhost:8080/matches?page=1&player_name=Nel
+
 ### @name Duplicate match
 POST http://localhost:8080/matches
 Content-Type: application/json

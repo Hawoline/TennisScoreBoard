@@ -51,4 +51,8 @@ public class MatchService {
     public List<Match> findByPlayerName(String playerName) {
         return matchRepository.getBy(playerName);
     }
+
+    public List<Match> getCompletedMatches() {
+        return matchRepository.getAll();
+    }
 }

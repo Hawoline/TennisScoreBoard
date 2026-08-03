@@ -3,6 +3,9 @@ package ru.hawoline.tennisscoreboard.data.entity;
 import ru.hawoline.tennisscoreboard.domain.ScoreMapper;
 import ru.hawoline.tennisscoreboard.domain.model.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MatchMapper {
     public CurrentMatchResponse toResponse(Match match) {
         Player first = match.getFirstPlayer();
@@ -33,5 +36,22 @@ public class MatchMapper {
         Player second = new Player(secondEntity.getId(), secondEntity.getName());
         Player winner = new Player(winnerEntity.getId(), winnerEntity.getName());
         return new Match(first, second, winner);
+    }
+
+    public List<CompletedMatchResponse> toCompletedMatchResponses(List<Match> completed) {
+        List<CompletedMatchResponse> result = new ArrayList<>();
+        for (Match match: completed) {
+            result.add(toCompletedMatchResponse(match));
+        }
+
+        return result;
+    }
+
+    private CompletedMatchResponse toCompletedMatchResponse(Match match) {
+        return new CompletedMatchResponse(
+                match.getFirstPlayer().getName(),
+                match.getSecondPlayer().getName(),
+                match.getWinner().getName()
+        );
     }
 }
