@@ -19,6 +19,9 @@ GET http://localhost:8080/matches?page=1&player_name=Nel
 GET http://localhost:8080/matches/{{match_uuid}}
 
 ###
+GET http://localhost:8080/matches/3rffrf
+
+###
 GET http://localhost:8080/matches/match
 
 ### @name win match

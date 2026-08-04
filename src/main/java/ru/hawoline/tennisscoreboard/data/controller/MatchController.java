@@ -27,37 +27,27 @@ public class MatchController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String newMatch(@RequestBody Opponents opponents) {
+    public String newMatch(@RequestBody Opponents opponents) throws DuplicateMatchException {
         if (opponents.getFirstPlayerName().equals(opponents.getSecondPlayerName())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Duplicate player");
         }
         if (opponents.getFirstPlayerName().isEmpty() || opponents.getSecondPlayerName().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empty player name");
         }
-        try {
-            return """
+        return """
                     {
                         "id": "%s"
                     }""".formatted(matchService.newMatch(opponents));
-        } catch (DuplicateMatchException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Match exists");
-        }
     }
 
     @PostMapping(path = "/{uuid}/point", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody CurrentMatchResponse addPoint(@PathVariable("uuid") String uuid, @RequestBody AddPointRequest addPointRequest) {
+    public @ResponseBody CurrentMatchResponse addPoint(@PathVariable("uuid") String uuid, @RequestBody AddPointRequest addPointRequest) throws PlayerNotFoundException, MatchNotFoundException {
         if (addPointRequest.getName().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Empty player name");
         }
-        try {
-            Match match = matchService.addPoint(uuid, addPointRequest.getName());
-            return matchMapper.toResponse(match);
-        } catch (PlayerNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Player not found");
-        } catch (MatchNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Match not found");
-        }
+        Match match = matchService.addPoint(uuid, addPointRequest.getName());
+        return matchMapper.toResponse(match);
     }
 
     @GetMapping(path = "/{uuid}")
