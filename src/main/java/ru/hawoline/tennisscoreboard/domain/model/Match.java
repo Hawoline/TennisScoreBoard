@@ -7,6 +7,8 @@ public class Match {
     private Player secondPlayer;
     private GameStage gameStage = GameStage.GAME;
     private Player winner;
+    private Player winPlayer;
+    private Player losePlayer;
 
     public Match(Player firstPlayer, Player secondPlayer, Player winner) {
         this(firstPlayer, secondPlayer);
@@ -19,25 +21,15 @@ public class Match {
     }
     
     public void winScore(String playerName) throws PlayerNotFoundException {
-        Player winPlayer;
-        Player losePlayer;
-        if (firstPlayer.getName().equals(playerName)) {
-            winPlayer = firstPlayer;
-            losePlayer = secondPlayer;
-        } else if (secondPlayer.getName().equals(playerName)){
-            winPlayer = secondPlayer;
-            losePlayer = firstPlayer;
-        } else {
-            throw new PlayerNotFoundException();
-        }
+        selectPlayers(playerName);
         if (gameStage == GameStage.END) {
             return;
         }
         winPlayer.winScore();
-        if (gameStage == GameStage.TIE_BREAK && winPlayer.getScore() > 6 && hasSuperiority(winPlayer, losePlayer)) {
+        if (gameStage == GameStage.TIE_BREAK && winPlayer.getScore() > 6 && hasSuperiority()) {
             gameStage = GameStage.GAME;
             winSet(winPlayer, losePlayer);
-        } else if (gameStage == GameStage.GAME && winPlayer.getScore() > 3 && hasSuperiority(winPlayer, losePlayer)) {
+        } else if (gameStage == GameStage.GAME && winPlayer.getScore() > 3 && hasSuperiority()) {
             winPlayer.winGame();
             losePlayer.setScore(0);
             if (winPlayer.getGames() > 5) {
@@ -52,7 +44,19 @@ public class Match {
         }
     }
 
-    private boolean hasSuperiority(Player winPlayer, Player losePlayer) {
+    private void selectPlayers(String playerName) throws PlayerNotFoundException {
+        if (firstPlayer.getName().equals(playerName)) {
+            winPlayer = firstPlayer;
+            losePlayer = secondPlayer;
+        } else if (secondPlayer.getName().equals(playerName)){
+            winPlayer = secondPlayer;
+            losePlayer = firstPlayer;
+        } else {
+            throw new PlayerNotFoundException();
+        }
+    }
+
+    private boolean hasSuperiority() {
         return winPlayer.getScore() > losePlayer.getScore() + 1;
     }
 

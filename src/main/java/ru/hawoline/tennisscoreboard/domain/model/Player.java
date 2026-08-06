@@ -28,6 +28,15 @@ public class Player {
     public Player() {
     }
 
+    public void winScore() {
+        score++;
+    }
+
+    public void winGame() {
+        games++;
+        score = 0;
+    }
+
     public void winSet() {
         sets++;
         newSet();
@@ -64,15 +73,6 @@ public class Player {
 
     public int getSets() {
         return sets;
-    }
-
-    public void winScore() {
-        score++;
-    }
-
-    public void winGame() {
-        games++;
-        score = 0;
     }
 
     @Override
