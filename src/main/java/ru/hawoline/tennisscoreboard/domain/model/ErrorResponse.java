@@ -1,4 +1,4 @@
-package ru.hawoline.tennisscoreboard.data.entity;
+package ru.hawoline.tennisscoreboard.domain.model;
 
 public class ErrorResponse {
     private final String message;

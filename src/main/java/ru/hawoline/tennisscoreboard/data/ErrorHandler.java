@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import ru.hawoline.tennisscoreboard.data.entity.ErrorResponse;
+import ru.hawoline.tennisscoreboard.domain.model.ErrorResponse;
 import ru.hawoline.tennisscoreboard.domain.exception.DuplicateMatchException;
 import ru.hawoline.tennisscoreboard.domain.exception.MatchNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.exception.PlayerNotFoundException;
@@ -13,7 +13,7 @@ import ru.hawoline.tennisscoreboard.domain.exception.PlayerNotFoundException;
 public class ErrorHandler {
 
     @ExceptionHandler(DuplicateMatchException.class)
-    public ResponseEntity<ErrorResponse> handleDuplicateMatchException(DuplicateMatchException e) {
+    public ResponseEntity<ErrorResponse> handleDuplicateMatchException() {
         ErrorResponse errorResponse = new ErrorResponse("Duplicate match");
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }

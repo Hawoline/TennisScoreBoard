@@ -8,7 +8,7 @@ public class PlayerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(unique = true)
+    @Column(unique = true, length = 15)
     private String name;
 
     public PlayerEntity(int id, String name) {
