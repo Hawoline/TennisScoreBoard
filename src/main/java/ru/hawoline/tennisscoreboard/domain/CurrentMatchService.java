@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class CurrentMatchService {
     private final ConcurrentHashMap<String, Match> currentMatches = new ConcurrentHashMap<>();
-    private final ScoreCalculator scoreCalculator = new ScoreCalculator();
 
     public void newMatch(String uuid, Match match) throws DuplicateMatchException {
         Player firstPlayer = match.getFirstPlayer();
@@ -37,16 +36,7 @@ public class CurrentMatchService {
         if (match == null) {
             throw new MatchNotFoundException();
         }
-        String firstPlayerName = match.getFirstPlayer().getName();
-        String secondPlayerName = match.getSecondPlayer().getName();
-        if (firstPlayerName.equals(playerName)) {
-            scoreCalculator.win(match, 0);
-        } else if (secondPlayerName.equals(playerName)) {
-            scoreCalculator.win(match, 1);
-        } else {
-            throw new PlayerNotFoundException();
-        }
-
+        match.winScore(playerName);
         if (match.getWinner() != null) {
             currentMatches.remove(matchUuid);
         }

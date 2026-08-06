@@ -9,7 +9,6 @@ public class Player {
     private int games;
     private int sets;
 
-
     public Player(String name, int score, int games, int sets) {
         this.name = name;
         this.score = score;
@@ -27,6 +26,16 @@ public class Player {
     }
 
     public Player() {
+    }
+
+    public void winSet() {
+        sets++;
+        newSet();
+    }
+
+    public void newSet() {
+        score = 0;
+        games = 0;
     }
 
     public int getId() {
@@ -53,16 +62,8 @@ public class Player {
         return games;
     }
 
-    public void setGames(int games) {
-        this.games = games;
-    }
-
     public int getSets() {
         return sets;
-    }
-
-    public void setSets(int sets) {
-        this.sets = sets;
     }
 
     public void winScore() {
@@ -71,10 +72,7 @@ public class Player {
 
     public void winGame() {
         games++;
-    }
-
-    public void winSet() {
-        sets++;
+        score = 0;
     }
 
     @Override
