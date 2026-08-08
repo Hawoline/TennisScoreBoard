@@ -7,8 +7,8 @@ public class Match {
     private Player secondPlayer;
     private GameStage gameStage = GameStage.GAME;
     private Player winner;
-    private Player winPlayer;
-    private Player losePlayer;
+    private Player winScorePlayer;
+    private Player loseScorePlayer;
 
     public Match(Player firstPlayer, Player secondPlayer, Player winner) {
         this(firstPlayer, secondPlayer);
@@ -25,20 +25,20 @@ public class Match {
         if (gameStage == GameStage.END) {
             return;
         }
-        winPlayer.winScore();
-        if (gameStage == GameStage.TIE_BREAK && winPlayer.getScore() > 6 && hasSuperiority()) {
+        winScorePlayer.winScore();
+        if (gameStage == GameStage.TIE_BREAK && winScorePlayer.getScore() > 6 && hasSuperiority()) {
             gameStage = GameStage.GAME;
-            winSet(winPlayer, losePlayer);
-        } else if (gameStage == GameStage.GAME && winPlayer.getScore() > 3 && hasSuperiority()) {
-            winPlayer.winGame();
-            losePlayer.setScore(0);
-            if (winPlayer.getGames() > 5) {
-                if (losePlayer.getGames() == 6) {
+            winSet(winScorePlayer, loseScorePlayer);
+        } else if (gameStage == GameStage.GAME && winScorePlayer.getScore() > 3 && hasSuperiority()) {
+            winScorePlayer.winGame();
+            loseScorePlayer.setScore(0);
+            if (winScorePlayer.getGames() > 5) {
+                if (loseScorePlayer.getGames() == 6) {
                     gameStage = GameStage.TIE_BREAK;
-                    winPlayer.setScore(0);
-                    losePlayer.setScore(0);
-                } else if (winPlayer.getGames() > losePlayer.getGames() + 1 || winPlayer.getGames() == 7) {
-                    winSet(winPlayer, losePlayer);
+                    winScorePlayer.setScore(0);
+                    loseScorePlayer.setScore(0);
+                } else if (winScorePlayer.getGames() > loseScorePlayer.getGames() + 1 || winScorePlayer.getGames() == 7) {
+                    winSet(winScorePlayer, loseScorePlayer);
                 }
             }
         }
@@ -46,18 +46,18 @@ public class Match {
 
     private void selectPlayers(String playerName) throws PlayerNotFoundException {
         if (firstPlayer.getName().equals(playerName)) {
-            winPlayer = firstPlayer;
-            losePlayer = secondPlayer;
+            winScorePlayer = firstPlayer;
+            loseScorePlayer = secondPlayer;
         } else if (secondPlayer.getName().equals(playerName)){
-            winPlayer = secondPlayer;
-            losePlayer = firstPlayer;
+            winScorePlayer = secondPlayer;
+            loseScorePlayer = firstPlayer;
         } else {
             throw new PlayerNotFoundException();
         }
     }
 
     private boolean hasSuperiority() {
-        return winPlayer.getScore() > losePlayer.getScore() + 1;
+        return winScorePlayer.getScore() > loseScorePlayer.getScore() + 1;
     }
 
     private void winSet(Player winPlayer, Player losePlayer) {

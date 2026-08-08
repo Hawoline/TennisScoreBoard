@@ -26,6 +26,7 @@ public class MatchController {
         this.matchService = matchService;
     }
 
+    @CrossOrigin
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public String newMatch(@RequestBody Opponents opponents) throws DuplicateMatchException {
         if (opponents.getFirstPlayerName().equals(opponents.getSecondPlayerName())) {
@@ -40,6 +41,7 @@ public class MatchController {
                     }""".formatted(matchService.newMatch(opponents));
     }
 
+    @CrossOrigin
     @PostMapping(path = "/{uuid}/point", consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody CurrentMatchResponse addPoint(@PathVariable("uuid") String uuid, @RequestBody AddPointRequest addPointRequest) throws PlayerNotFoundException, MatchNotFoundException {
@@ -50,6 +52,7 @@ public class MatchController {
         return matchMapper.toResponse(match);
     }
 
+    @CrossOrigin
     @GetMapping(path = "/{uuid}")
     public @ResponseBody CurrentMatchResponse getCurrentMatchBy(@PathVariable("uuid") String uuid) {
         if (uuid.isEmpty()) {
@@ -59,6 +62,7 @@ public class MatchController {
         return matchMapper.toResponse(match);
     }
 
+    @CrossOrigin
     @GetMapping()
     public @ResponseBody CompletedMatchesResponse getCompletedMatches(
             @RequestParam(name = "page", defaultValue = "-1") int page,

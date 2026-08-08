@@ -13,19 +13,19 @@ public class MatchMapper {
         ScoreMapper scoreMapper = new ScoreMapper();
         StringScorePair scores = scoreMapper.toString(first.getScore(), second.getScore());
         Player winner = match.getWinner();
-        return new CurrentMatchResponse(
+        return new CurrentMatchResponse(new PlayerResponse(
                 first.getName(),
-                second.getName(),
                 match.getGameStage() == GameStage.GAME ? scores.getFirstPlayerScore() : null,
-                match.getGameStage() == GameStage.GAME ? scores.getSecondPlayerScore() : null,
                 first.getGames(),
-                second.getGames(),
                 first.getSets(),
+                match.getGameStage() == GameStage.TIE_BREAK ? first.getScore() : null
+        ), new PlayerResponse(
+                second.getName(),
+                match.getGameStage() == GameStage.GAME ? scores.getSecondPlayerScore() : null,
+                second.getGames(),
                 second.getSets(),
-                match.getGameStage() == GameStage.TIE_BREAK ? first.getScore() : null,
-                match.getGameStage() == GameStage.TIE_BREAK ? second.getScore() : null,
-                winner == null ? null : winner.getName()
-        );
+                match.getGameStage() == GameStage.TIE_BREAK ? second.getScore() : null
+        ), winner == null ? null : winner.getName());
     }
 
     public Match fromCompletedMatchEntity(CompletedMatchEntity completedMatchEntity) {
@@ -40,7 +40,7 @@ public class MatchMapper {
 
     public List<CompletedMatchResponse> toCompletedMatchResponses(List<Match> completed) {
         List<CompletedMatchResponse> result = new ArrayList<>();
-        for (Match match: completed) {
+        for (Match match : completed) {
             result.add(toCompletedMatchResponse(match));
         }
 

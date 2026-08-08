@@ -36,13 +36,16 @@ public class MatchService {
     public Match addPoint(String uuid, String playerName) throws PlayerNotFoundException, MatchNotFoundException {
         Match match = currentMatchService.addPoint(uuid, playerName);
 
-        if (match.getWinner() != null) {
-            Player first = playerRepository.getBy(match.getFirstPlayer().getName());
-            Player second = playerRepository.getBy(match.getSecondPlayer().getName());
-            Player winner = playerRepository.getBy(match.getWinner().getName());
-            match.getFirstPlayer().setId(first.getId());
-            match.getSecondPlayer().setId(second.getId());
-            match.getWinner().setId(winner.getId());
+        Player matchWinner = match.getWinner();
+        if (matchWinner != null) {
+            Player firstPlayer = match.getFirstPlayer();
+            Player first = playerRepository.getBy(firstPlayer.getName());
+            Player secondPlayer = match.getSecondPlayer();
+            Player second = playerRepository.getBy(secondPlayer.getName());
+            Player winner = playerRepository.getBy(matchWinner.getName());
+            firstPlayer.setId(first.getId());
+            secondPlayer.setId(second.getId());
+            matchWinner.setId(winner.getId());
             matchRepository.save(match);
         }
         return match;

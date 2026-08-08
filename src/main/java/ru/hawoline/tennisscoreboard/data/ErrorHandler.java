@@ -31,8 +31,9 @@ public class ErrorHandler {
     }
 
     @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<ErrorResponse> handleDuplicateMatchException(NullPointerException e) {
-        ErrorResponse errorResponse = new ErrorResponse("Current match not found");
+    public ResponseEntity<ErrorResponse> handleMatchNotFound(NullPointerException e) {
+        System.out.println(e.getMessage());
+        ErrorResponse errorResponse = new ErrorResponse("Current match not found" + e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 }
