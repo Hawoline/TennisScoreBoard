@@ -75,7 +75,7 @@ public class MatchController {
                 return new CompletedMatchesResponse(completedMatchResponses, 0, 1);
             }
 
-            CompletedMatchesResponse completedMatchesPage = getFromPage(completedMatchResponses, page);
+            CompletedMatchesResponse completedMatchesPage = matchService.getFromPage(completedMatchResponses, page);
             return completedMatchesPage;
         }
 
@@ -85,28 +85,9 @@ public class MatchController {
             return new CompletedMatchesResponse(completedMatchResponses, 0, 1);
         }
 
-        CompletedMatchesResponse completedMatchesPage = getFromPage(completedMatchResponses, page);
+        CompletedMatchesResponse completedMatchesPage = matchService.getFromPage(completedMatchResponses, page);
         return completedMatchesPage;
     }
 
-    private CompletedMatchesResponse getFromPage(List<CompletedMatchResponse> completedMatchResponses, int page) {
-        int countInPage = 10;
-        int size = completedMatchResponses.size();
-        if (size <= countInPage) {
-            return new CompletedMatchesResponse(completedMatchResponses, 0, 1);
-        }
-        List<CompletedMatchResponse> result = new ArrayList<>();
-        int begin = countInPage * page;
-        if (begin > size) {
-            for (int i = 0; i < countInPage; i++) {
-                result.add(completedMatchResponses.get(size - i - 1));
-            }
-        } else {
-            for (int i = 0; i < countInPage; i++) {
-                result.add(completedMatchResponses.get(begin + i));
-            }
-        }
 
-        return new CompletedMatchesResponse(result, page, size / countInPage);
-    }
 }

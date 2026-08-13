@@ -1,5 +1,5 @@
 # @name create matches and players
-POST http://localhost:8080/matches
+POST http://185.242.107.137:8080/TennisScoreBoard-0.0.1-SNAPSHOT/matches
 Content-Type: application/json
 
 {

@@ -3,10 +3,9 @@ package ru.hawoline.tennisscoreboard.domain;
 import ru.hawoline.tennisscoreboard.domain.exception.DuplicateMatchException;
 import ru.hawoline.tennisscoreboard.domain.exception.MatchNotFoundException;
 import ru.hawoline.tennisscoreboard.domain.exception.PlayerNotFoundException;
-import ru.hawoline.tennisscoreboard.domain.model.Match;
-import ru.hawoline.tennisscoreboard.domain.model.Opponents;
-import ru.hawoline.tennisscoreboard.domain.model.Player;
+import ru.hawoline.tennisscoreboard.domain.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,6 +57,28 @@ public class MatchService {
     public List<Match> findByPlayerName(String playerName) {
         return matchRepository.getBy(playerName);
     }
+
+    public CompletedMatchesResponse getFromPage(List<CompletedMatchResponse> completedMatchResponses, int page) {
+        int countInPage = 10;
+        int size = completedMatchResponses.size();
+        if (size <= countInPage) {
+            return new CompletedMatchesResponse(completedMatchResponses, 0, 1);
+        }
+        List<CompletedMatchResponse> result = new ArrayList<>();
+        int begin = countInPage * page;
+        if (begin + countInPage > size) {
+            for (int i = 0; i < size - begin; i++) {
+                result.add(completedMatchResponses.get(size - i - 1));
+            }
+        } else {
+            for (int i = 0; i < countInPage; i++) {
+                result.add(completedMatchResponses.get(begin + i));
+            }
+        }
+
+        return new CompletedMatchesResponse(result, page, size / countInPage);
+    }
+
 
     public List<Match> getCompletedMatches() {
         return matchRepository.getAll();
