@@ -1,4 +1,4 @@
-const HOST = 'http://localhost:8080/';
+const HOST = 'http://185.242.107.137:8080/TennisScoreBoard-0.0.1-SNAPSHOT/';
 
 function initNewMatchPage() {
     $('#new-match-form').on('submit', function (e) {
