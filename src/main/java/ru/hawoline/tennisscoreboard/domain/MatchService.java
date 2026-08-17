@@ -36,6 +36,7 @@ public class MatchService {
         Match match = currentMatchService.addPoint(uuid, playerName);
 
         Player matchWinner = match.getWinner();
+        System.out.println(match.getFirstPlayer().getId());
         if (matchWinner != null) {
             Player firstPlayer = match.getFirstPlayer();
             Player first = playerRepository.getBy(firstPlayer.getName());

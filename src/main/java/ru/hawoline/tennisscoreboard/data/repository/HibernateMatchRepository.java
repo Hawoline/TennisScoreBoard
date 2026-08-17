@@ -31,9 +31,7 @@ public class HibernateMatchRepository implements MatchRepository {
                 new PlayerEntity(second.getId(), second.getName()),
                 new PlayerEntity(winner.getId(), winner.getName())
         );
-        entityManager.getTransaction().begin();
         entityManager.persist(completedMatchEntity);
-        entityManager.getTransaction().commit();
     }
 
     @Override

@@ -1,5 +1,5 @@
 # @name create matches and players
-POST http://185.242.107.137:8080/TennisScoreBoard-0.0.1-SNAPSHOT/matches
+POST localhost:8080/matches
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ GET http://localhost:8080/matches
 ###
 GET http://localhost:8080/matches?page=1&player_name=Neltan
 
-###
+### win match
 GET http://localhost:8080/matches/{{match_uuid}}
 
 ### @name win match

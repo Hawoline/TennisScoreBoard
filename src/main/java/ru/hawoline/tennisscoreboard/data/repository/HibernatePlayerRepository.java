@@ -19,20 +19,14 @@ public class HibernatePlayerRepository implements PlayerRepository {
     @Override
     public void save(Player player) {
         PlayerEntity playerEntity = new PlayerEntity(player.getName());
-        entityManager.getTransaction().begin();
-        try {
-            entityManager.persist(playerEntity);
-        } catch (PersistenceException e) {
-
-        }
-        entityManager.getTransaction().commit();
+        entityManager.persist(playerEntity);
     }
 
     @Override
-    public Player getBy(String key) {
+    public Player getBy(String name) {
         try {
             TypedQuery<PlayerEntity> tq = entityManager.createQuery("from PlayerEntity WHERE name=:name", PlayerEntity.class);
-            PlayerEntity result = tq.setParameter("name", key).getSingleResult();
+            PlayerEntity result = tq.setParameter("name", name).getSingleResult();
 
             return new Player(result.getId(), result.getName());
         } catch (NoResultException noresult) {
